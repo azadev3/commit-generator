@@ -9,7 +9,6 @@ import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 
-// ─── Config ──────────────────────────────────────────────────────────────────
 const CONFIG_DIR = path.join(os.homedir(), '.commit-gen');
 const CONFIG_FILE = path.join(CONFIG_DIR, 'config.json');
 

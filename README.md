@@ -1,10 +1,10 @@
 # 🤖 @azadev/commit-gen
 
-> **Groq + LLaMA 3.3 70B** süni zəkası ilə işləyən git commit mesajı generatoru
+> **Groq + LLaMA 3.3 70B** süni intellekt ilə işləyən git commit mesajı generatoru
 
 ```
              commit-gen
-  AI destəkli commit asistanı
+  AI dəstəkli commit asistanı
   ──────────────────────────────────────────────────────
   💡  Commit mesajını seç:
 
@@ -24,7 +24,7 @@
 - 🧠 **AI ilə avtomatik** — stage edilmiş dəyişikliklərdən commit mesajı yaradır
 - 🌐 **3 interfeys dili** — Azərbaycanca, İngiliscə, Türkcə
 - 📝 **3 commit mesajı dili** — Azərbaycanca, İngiliscə, Türkcə
-- 🔑 **Bir dəfəlik quraşdırma** — API açarı lokalda saxlanır, bir daha sorulmur
+- 🔑 **Bir dəfəlik quraşdırma** — API açarı lokalda saxlanır, bir daha soruşulmur
 - ⚡ **Çox sürətli** — Groq inferansı mövcud olan ən sürətli həllərdən biridir
 - 🎨 **Gözəl CLI** — rəngli commit tipləri, spinner animasiyası, təmiz dizayn
 - 🔒 **Məlumatların təhlükəsizliyi** — heç bir server istifadə edilmir, yalnız Groq API
@@ -33,7 +33,7 @@
 
 ## 📦 Quraşdırma
 
-### Tövsiyə olunan — quraşdırma olmadan istifadə
+### Quraşdırma olmadan istifadə
 
 ```bash
 npx @azadev/commit-gen
@@ -54,21 +54,21 @@ commit-gen
 ### Addım 1 — Pulsuz Groq API açarı al
 
 1. [console.groq.com](https://console.groq.com) saytına daxil ol
-2. Qeydiyyatdan keç — Google hesabı ilə 30 saniyədə olur
+2. Qeydiyyatdan keç — Google hesabı ilə də qeydiyyatdan keçə bilərsiniz
 3. **API Keys** bölməsinə keç → **Create API Key** düyməsinə bas
 4. `gsk_...` ilə başlayan açarı kopyala
 
-> Groq şəxsi istifadə üçün **tamamilə pulsuzdur**. Kredit kartı tələb olunmur.
+> Groq şəxsi istifadə üçün **tamamilə pulsuzdur**. Ödəniş kartı tələb olunmur.
 
 ### Addım 2 — Dəyişiklikləri stage et
 
 ```bash
 git add .
-# və ya konkret faylları:
+# və ya konkret fayl yolunu da yaza bilərsən:
 git add src/auth.ts
 ```
 
-### Addım 3 — commit-gen işlət
+### Addım 3 — commit-gen
 
 ```bash
 npx @azadev/commit-gen
@@ -76,13 +76,13 @@ npx @azadev/commit-gen
 commit-gen
 ```
 
-**Yalnız ilk işlətmədə** aşağıdakılar soruşulacaq:
+**Yalnız ilk işlətmədə** aşağıdakıları soruşacaq:
 
 1. **İnterfeys dili** seç — Azərbaycanca / İngiliscə / Türkcə
 2. **Commit mesajı dili** seç
 3. **Groq API açarını** daxil et
 
-Hər şey saxlanılır — növbəti işlətmələrdə birbaşa generate edir.
+Hamısını yadda saxlayır və növbəti işlətmələrində birbaşa tanıyır.
 
 ---
 
@@ -100,7 +100,7 @@ Heç bir konfiqurasiya faylına ehtiyyac yoxdur.
 
 | Komanda                  | Nə edir                                              |
 | ------------------------ | ---------------------------------------------------- |
-| `commit-gen`             | Normal işlət — commit mesajı yarat                   |
+| `commit-gen`             | Normal işlətmə — commit mesajı yarat                 |
 | `commit-gen --config`    | Config faylının yerini və məzmununu göstər           |
 | `commit-gen --reset`     | Hər şeyi sıfırla — dil + API açarı yenidən soruşulur |
 | `commit-gen --reset-key` | Yalnız API açarını sil                               |
@@ -220,10 +220,10 @@ Açar etibarsız olduqda commit-gen aşkar edib soruşacaq:
 ## ❓ Tez-tez Verilən Suallar
 
 **S: Ödənişli Groq hesabı lazımdırmı?**
-C: Xeyr. Groq-un pulsuz planı gündəlik commit generasiyası üçün kifayətdən artıqdır.
+C: Xeyr. Groq-un pulsuz planı gündəlik commit generasiyası üçün kifayətdir.
 
 **S: Kodum hara göndərilir?**
-C: Yalnız Groq API-ə — inferans üçün. API açarın lokal config faylında saxlanır. Başqa heç bir serverə heç nə göndərilmir.
+C: Yalnız Groq API-a — inferans üçün. API açarın lokal config faylında saxlanır. Başqa heç bir serverə heç nə göndərilmir.
 
 **S: "Stage edilmiş dəyişiklik yoxdur" deyir?**
 C: Əvvəl `git add .` işlət. commit-gen yalnız `git diff --cached` — yəni stage edilmiş faylları oxuyur.
@@ -253,11 +253,8 @@ rm -rf ~/.commit-gen   # saxlanmış config və API açarını silir
 
 ## 📦 @azadev Paketləri
 
-Bu paket **Azad Mirheydərzadə** tərəfindən yazılmışdır. Digər npm paketlərim:
+Bu paket **Azad Mirheydərzadə (azadev)** tərəfindən yazılmışdır. Digər npm paketlərim:
 
-| Paket                                                                            | Açıqlama                                    |
-| -------------------------------------------------------------------------------- | ------------------------------------------- |
-| [`@azadev/commit-gen`](https://www.npmjs.com/package/@azadev/commit-gen)         | AI ilə git commit mesajı generatoru         |
 | [`@azadev/react-toastdev`](https://www.npmjs.com/package/@azadev/react-toastdev) | React üçün səsli toast bildiriş kitabxanası |
 
 ---

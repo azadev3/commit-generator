@@ -4,7 +4,7 @@
 
 ```
              commit-gen
-  AI dəstəkli commit asistanı
+  AI dəstəkli commit yaradıcı
   ──────────────────────────────────────────────────────
   💡  Commit mesajını seç:
 

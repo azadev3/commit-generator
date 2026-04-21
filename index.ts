@@ -252,6 +252,54 @@ Rules:
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
+  const args = process.argv.slice(2);
+
+  // ── --config : show config file path & contents ────────────────────────────
+  if (args.includes('--config')) {
+    console.log('\n' + chalk.bgBlue.white.bold('  📁  commit-gen config  '));
+    console.log('\n' + chalk.bold('  Fayl yeri:'));
+    console.log(chalk.cyan(`  ${CONFIG_FILE}\n`));
+    if (fs.existsSync(CONFIG_FILE)) {
+      const parsed: Config = JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf-8'));
+      console.log(chalk.bold('  Mövcud konfiqurasiya:'));
+      console.log(chalk.gray('  ──────────────────────────────────'));
+      console.log(chalk.white('  uiLang     : ') + chalk.cyan(parsed.uiLang ?? '—'));
+      console.log(chalk.white('  commitLang : ') + chalk.cyan(parsed.commitLang ?? '—'));
+      console.log(
+        chalk.white('  apiKey     : ') +
+          chalk.green(parsed.apiKey ? parsed.apiKey.slice(0, 8) + '••••••••••••••••' : '—'),
+      );
+      console.log(chalk.gray('  ──────────────────────────────────'));
+    } else {
+      console.log(chalk.yellow('  ⚠  Config faylı hələ yaradılmayıb. commit-gen işlət.\n'));
+    }
+    console.log(chalk.gray('\n  Dili dəyişmək üçün  →  commit-gen --reset'));
+    console.log(chalk.gray('  API açarı sıfırla   →  commit-gen --reset-key\n'));
+    process.exit(0);
+  }
+
+  // ── --reset : wipe entire config (language + key) ──────────────────────────
+  if (args.includes('--reset')) {
+    if (fs.existsSync(CONFIG_FILE)) {
+      fs.unlinkSync(CONFIG_FILE);
+      console.log(
+        '\n' + chalk.green('  ✔  Config sıfırlandı. Dil və API açarı yenidən sorulacaq.\n'),
+      );
+    } else {
+      console.log('\n' + chalk.yellow('  ⚠  Config faylı tapılmadı, artıq təmizdir.\n'));
+    }
+    process.exit(0);
+  }
+
+  // ── --reset-key : wipe only api key ────────────────────────────────────────
+  if (args.includes('--reset-key')) {
+    saveConfig({ apiKey: '' });
+    console.log(
+      '\n' + chalk.green('  ✔  API açarı silindi. Növbəti işlətmədə yeni açar soruşulacaq.\n'),
+    );
+    process.exit(0);
+  }
+
   // Banner
   console.log('\n' + chalk.bgBlue.white.bold(`  ${' '.repeat(10)} commit-gen ${' '.repeat(10)}  `));
   console.log(chalk.blue.dim('  AI-powered commit assistant\n'));

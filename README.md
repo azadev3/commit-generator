@@ -1,97 +1,130 @@
-# 🤖 commit-gen
+# 🤖 @azadev/commit-gen
 
-> AI-powered git commit message generator — powered by **Groq + LLaMA 3.3 70B**
+> **Groq + LLaMA 3.3 70B** süni zəkası ilə işləyən git commit mesajı generatoru
 
 ```
              commit-gen
-  AI-powered commit assistant
+  AI destəkli commit asistanı
   ──────────────────────────────────────────────────────
-  💡  Select a commit message:
+  💡  Commit mesajını seç:
 
  1   feat(auth): add JWT refresh token rotation logic
  2   fix(session): resolve token expiry edge case on logout
  3   refactor(middleware): simplify auth guard with token util
-  0)  ✖  Cancel
+
+  0)  ✖  Ləğv edildi
   ──────────────────────────────────────────────────────
-  Your choice (0-3): _
+  Seçim et (0-3): _
 ```
 
 ---
 
-## ✨ Features
+## ✨ Xüsusiyyətlər
 
-- 🧠 **AI-generated** conventional commit messages from your staged diff
-- 🌐 **3 UI languages** — Azerbaijani, English, Turkish
-- 📝 **3 commit message languages** — Azerbaijani, English, Turkish
-- 🔑 **One-time API key setup** — saved locally, never asked again
-- ⚡ **Lightning fast** — Groq inference is among the fastest available
-- 🎨 **Beautiful CLI** — color-coded commit types, spinners, clean layout
-- 🔒 **Your key, your data** — nothing is sent to any server except Groq
-
----
-
-## 📦 Installation
-
-```bash
-npm install -g commit-gen
-```
-
-Or use without installing:
-
-```bash
-npx commit-gen
-```
+- 🧠 **AI ilə avtomatik** — stage edilmiş dəyişikliklərdən commit mesajı yaradır
+- 🌐 **3 interfeys dili** — Azərbaycanca, İngiliscə, Türkcə
+- 📝 **3 commit mesajı dili** — Azərbaycanca, İngiliscə, Türkcə
+- 🔑 **Bir dəfəlik quraşdırma** — API açarı lokalda saxlanır, bir daha sorulmur
+- ⚡ **Çox sürətli** — Groq inferansı mövcud olan ən sürətli həllərdən biridir
+- 🎨 **Gözəl CLI** — rəngli commit tipləri, spinner animasiyası, təmiz dizayn
+- 🔒 **Məlumatların təhlükəsizliyi** — heç bir server istifadə edilmir, yalnız Groq API
 
 ---
 
-## 🚀 Quick Start
+## 📦 Quraşdırma
 
-### Step 1 — Get a free Groq API key
-
-1. Go to [console.groq.com](https://console.groq.com)
-2. Sign up (Google login supported — takes 30 seconds)
-3. Navigate to **API Keys** → click **Create API Key**
-4. Copy the key starting with `gsk_...`
-
-> Groq is **completely free** for personal use. No credit card required.
-
-### Step 2 — Stage your changes
+### Tövsiyə olunan — quraşdırma olmadan istifadə
 
 ```bash
-git add .
-# or stage specific files
-git add src/auth.ts
+npx @azadev/commit-gen
 ```
 
-### Step 3 — Run commit-gen
+### Qlobal quraşdırma — gündəlik istifadə üçün daha qısa komanda
 
 ```bash
+npm install -g @azadev/commit-gen
+# sonra istənilən git layihəsindən:
 commit-gen
 ```
 
-**First run only:** you'll be asked to:
+---
 
-1. Select your **UI language** (Azerbaijani / English / Turkish)
-2. Select your **commit message language**
-3. Enter your **Groq API key**
+## 🚀 Sürətli Başlanğıc
 
-Everything is saved — subsequent runs go straight to generating.
+### Addım 1 — Pulsuz Groq API açarı al
+
+1. [console.groq.com](https://console.groq.com) saytına daxil ol
+2. Qeydiyyatdan keç — Google hesabı ilə 30 saniyədə olur
+3. **API Keys** bölməsinə keç → **Create API Key** düyməsinə bas
+4. `gsk_...` ilə başlayan açarı kopyala
+
+> Groq şəxsi istifadə üçün **tamamilə pulsuzdur**. Kredit kartı tələb olunmur.
+
+### Addım 2 — Dəyişiklikləri stage et
+
+```bash
+git add .
+# və ya konkret faylları:
+git add src/auth.ts
+```
+
+### Addım 3 — commit-gen işlət
+
+```bash
+npx @azadev/commit-gen
+# və ya qlobal quraşdırma ilə:
+commit-gen
+```
+
+**Yalnız ilk işlətmədə** aşağıdakılar soruşulacaq:
+
+1. **İnterfeys dili** seç — Azərbaycanca / İngiliscə / Türkcə
+2. **Commit mesajı dili** seç
+3. **Groq API açarını** daxil et
+
+Hər şey saxlanılır — növbəti işlətmələrdə birbaşa generate edir.
 
 ---
 
-## 🔄 Workflow
+## 🔄 İş axını
 
 ```
-git add .  →  commit-gen  →  pick a message  →  committed ✔
+git add .  →  commit-gen  →  mesajı seç  →  commit atıldı ✔
 ```
 
-That's it. No flags, no config files to edit manually, no friction.
+Heç bir konfiqurasiya faylına ehtiyyac yoxdur.
 
 ---
 
-## 🌐 Changing Language
+## ⚙️ Faydalı Komandalar
 
-### Option 1 — Delete config and re-run (easiest)
+| Komanda                  | Nə edir                                              |
+| ------------------------ | ---------------------------------------------------- |
+| `commit-gen`             | Normal işlət — commit mesajı yarat                   |
+| `commit-gen --config`    | Config faylının yerini və məzmununu göstər           |
+| `commit-gen --reset`     | Hər şeyi sıfırla — dil + API açarı yenidən soruşulur |
+| `commit-gen --reset-key` | Yalnız API açarını sil                               |
+
+```bash
+# Config faylın harada olduğunu görmək istəyirsənsə:
+commit-gen --config
+
+# Çıxış nümunəsi:
+#  📁  commit-gen config
+#
+#  Mövcud konfiqurasiya:
+#  ──────────────────────────────────
+#  uiLang     : az
+#  commitLang : en
+#  apiKey     : gsk_••••••••••••••••
+#  ──────────────────────────────────
+```
+
+---
+
+## 🌐 Dili Dəyişmək
+
+### Variant 1 — Konfiqurasiyanı sil və yenidən başlat
 
 **Windows:**
 
@@ -105,119 +138,130 @@ del %USERPROFILE%\.commit-gen\config.json
 rm ~/.commit-gen/config.json
 ```
 
-Then run `commit-gen` — the setup wizard will appear again.
+Sonra `commit-gen` işlət — quraşdırma sehirbazı yenidən çıxacaq.
 
 ---
 
-### Option 2 — Edit config directly
+### Variant 2 — Config faylını birbaşa düzəlt
 
-Open `~/.commit-gen/config.json`:
+`~/.commit-gen/config.json` faylını aç:
 
 ```json
 {
   "apiKey": "gsk_...",
-  "uiLang": "en",
+  "uiLang": "az",
   "commitLang": "en"
 }
 ```
 
-Change the values:
+Dəyərləri dəyiş:
 
-| Field        | Options            | Description                   |
-| ------------ | ------------------ | ----------------------------- |
-| `uiLang`     | `az` / `en` / `tr` | CLI interface language        |
-| `commitLang` | `az` / `en` / `tr` | Generated commit msg language |
+| Sahə         | Seçimlər           | Açıqlama                     |
+| ------------ | ------------------ | ---------------------------- |
+| `uiLang`     | `az` / `en` / `tr` | CLI interfeys dili           |
+| `commitLang` | `az` / `en` / `tr` | Yaradılan commit mesajı dili |
 
-Save the file — takes effect immediately on next run.
-
----
-
-## 📁 Config File Location
-
-| OS      | Path                                     |
-| ------- | ---------------------------------------- |
-| Windows | `C:\Users\<you>\.commit-gen\config.json` |
-| macOS   | `/Users/<you>/.commit-gen/config.json`   |
-| Linux   | `/home/<you>/.commit-gen/config.json`    |
+Faylı saxla — növbəti işlətmədən etibarən qüvvəyə minir.
 
 ---
 
-## 🔑 Changing or Resetting API Key
+## 📁 Config Faylının Yeri
 
-If your API key becomes invalid or you want to use a new one:
+| Əməliyyat sistemi | Yer                                     |
+| ----------------- | --------------------------------------- |
+| Windows           | `C:\Users\<ad>\.commit-gen\config.json` |
+| macOS             | `/Users/<ad>/.commit-gen/config.json`   |
+| Linux             | `/home/<ad>/.commit-gen/config.json`    |
 
-**Option 1 — Let commit-gen handle it**
+---
 
-If the key is invalid, commit-gen will detect it and ask:
+## 🔑 API Açarını Sıfırlamaq
+
+Açarın etibarsız olduğu halda və ya yenisini istifadə etmək istədikdə:
+
+**Variant 1 — commit-gen özü idarə etsin**
+
+Açar etibarsız olduqda commit-gen aşkar edib soruşacaq:
 
 ```
-🔑  Do you want to reset your API key? (y/n):
+🔑  API açarını sıfırlamaq istəyirsiniz? (b/x):
 ```
 
-Press `y` → key is cleared → re-run to enter a new one.
+`b` bas → açar silinir → yenisini daxil etmək üçün yenidən işlət.
 
-**Option 2 — Manual reset**
+**Variant 2 — Əl ilə sıfırla**
 
-Edit `~/.commit-gen/config.json` and replace the `apiKey` value:
+`~/.commit-gen/config.json` faylında `apiKey` dəyərini dəyiş:
 
 ```json
 {
-  "apiKey": "gsk_your_new_key_here",
-  "uiLang": "en",
+  "apiKey": "gsk_yeni_acarını_bura_daxil_et",
+  "uiLang": "az",
   "commitLang": "en"
 }
 ```
 
 ---
 
-## 🎨 Commit Types — Color Guide
+## 🎨 Commit Tipləri — Rəng Bələdçisi
 
-| Color      | Types                          |
-| ---------- | ------------------------------ |
-| 🟢 Green   | `feat` — new features          |
-| 🔴 Red     | `fix` — bug fixes              |
-| 🟣 Magenta | `refactor` — code cleanup      |
-| 🔵 Blue    | `docs` — documentation         |
-| 🟡 Yellow  | `style` — formatting           |
-| 🩵 Cyan    | `perf` — performance           |
-| ⚪ Gray    | `chore`, `test`, `ci`, `build` |
+| Rəng         | Tiplər                         |
+| ------------ | ------------------------------ |
+| 🟢 Yaşıl     | `feat` — yeni funksionallıq    |
+| 🔴 Qırmızı   | `fix` — xəta düzəltmə          |
+| 🟣 Bənövşəyi | `refactor` — kod təmizliyi     |
+| 🔵 Mavi      | `docs` — sənədləşmə            |
+| 🟡 Sarı      | `style` — formatlama           |
+| 🩵 Cyan      | `perf` — performans            |
+| ⚪ Boz       | `chore`, `test`, `ci`, `build` |
 
 ---
 
-## ❓ FAQ
+## ❓ Tez-tez Verilən Suallar
 
-**Q: Do I need a paid Groq account?**
-A: No. Groq's free tier is more than enough for daily commit generation.
+**S: Ödənişli Groq hesabı lazımdırmı?**
+C: Xeyr. Groq-un pulsuz planı gündəlik commit generasiyası üçün kifayətdən artıqdır.
 
-**Q: Is my code sent anywhere?**
-A: Only to Groq's API for inference. Your API key stays in your local config file. Nothing goes to any other server.
+**S: Kodum hara göndərilir?**
+C: Yalnız Groq API-ə — inferans üçün. API açarın lokal config faylında saxlanır. Başqa heç bir serverə heç nə göndərilmir.
 
-**Q: It says "no staged changes"?**
-A: Run `git add .` first. commit-gen reads `git diff --cached` — only staged files are analyzed.
+**S: "Stage edilmiş dəyişiklik yoxdur" deyir?**
+C: Əvvəl `git add .` işlət. commit-gen yalnız `git diff --cached` — yəni stage edilmiş faylları oxuyur.
 
-**Q: The API key is invalid but I just created it?**
-A: Wait 10–15 seconds after creating a new key on Groq's console — it takes a moment to activate. Then try again.
+**S: API açarını yenicə yaratdım amma etibarsız deyir?**
+C: Groq konsolunda yeni açar yaratdıqdan sonra 10–15 saniyə gözlə — aktivləşməsi vaxt aparır. Sonra yenidən cəhd et.
 
-**Q: Can I use it with monorepos?**
-A: Yes. Run `commit-gen` from any subdirectory — it uses the current working directory's git context.
+**S: Monorepo ilə işləyirmi?**
+C: Bəli. İstənilən alt qovluqdan `commit-gen` işlət — cari işçi qovluğun git kontekstini istifadə edir.
 
-**Q: How do I uninstall?**
+**S: Necə silinir?**
 
 ```bash
-npm uninstall -g commit-gen
-rm -rf ~/.commit-gen   # removes saved config & API key
+npm uninstall -g @azadev/commit-gen
+rm -rf ~/.commit-gen   # saxlanmış config və API açarını silir
 ```
 
 ---
 
-## 🛠 Requirements
+## 🛠 Tələblər
 
 - Node.js **18+**
-- Git installed and in PATH
-- A free [Groq API key](https://console.groq.com)
+- Git quraşdırılmış və PATH-də olmalıdır
+- Pulsuz [Groq API açarı](https://console.groq.com)
 
 ---
 
-## 📄 License
+## 📦 @azadev Paketləri
 
-MIT © commit-gen
+Bu paket **Azad Mirheydərzadə** tərəfindən yazılmışdır. Digər npm paketlərim:
+
+| Paket                                                                            | Açıqlama                                    |
+| -------------------------------------------------------------------------------- | ------------------------------------------- |
+| [`@azadev/commit-gen`](https://www.npmjs.com/package/@azadev/commit-gen)         | AI ilə git commit mesajı generatoru         |
+| [`@azadev/react-toastdev`](https://www.npmjs.com/package/@azadev/react-toastdev) | React üçün səsli toast bildiriş kitabxanası |
+
+---
+
+## 📄 Lisenziya
+
+MIT © [Azad Mirheydərzadə](https://github.com/azadev3)

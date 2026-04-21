@@ -3,7 +3,7 @@
 > **Groq + LLaMA 3.3 70B** süni intellekt ilə işləyən git commit mesajı generatoru
 
 ```
-             commit-gen
+             @azadev/commit-gen
   AI dəstəkli commit yaradıcı
   ──────────────────────────────────────────────────────
   💡  Commit mesajını seç:
@@ -28,6 +28,7 @@
 - ⚡ **Çox sürətli** — Groq inferansı mövcud olan ən sürətli həllərdən biridir
 - 🎨 **Gözəl CLI** — rəngli commit tipləri, spinner animasiyası, təmiz dizayn
 - 🔒 **Məlumatların təhlükəsizliyi** — heç bir server istifadə edilmir, yalnız Groq API
+- 🚫 **Konflikt yoxdur** — `azadev-commit-gen` adı digər paketlərlə toqquşmur
 
 ---
 
@@ -39,13 +40,20 @@
 npx @azadev/commit-gen
 ```
 
-### Qlobal quraşdırma — gündəlik istifadə üçün daha qısa komanda
+### Qlobal quraşdırma — gündəlik istifadə üçün tövsiyə edilir
 
 ```bash
 npm install -g @azadev/commit-gen
-# sonra istənilən git layihəsindən:
-commit-gen
 ```
+
+Quraşdırmadan sonra istənilən git layihəsindən:
+
+```bash
+azadev-commit-gen
+```
+
+> **Qeyd:** Paket adı `@azadev/commit-gen`, lakin shell komandası `azadev-commit-gen`-dir.
+> Bu, digər `commit-gen` adlı paketlərlə ad konfliktinin qarşısını alır.
 
 ---
 
@@ -68,12 +76,14 @@ git add .
 git add src/auth.ts
 ```
 
-### Addım 3 — commit-gen
+### Addım 3 — azadev-commit-gen işlət
 
 ```bash
+# Qlobal quraşdırma ilə:
+azadev-commit-gen
+
+# Quraşdırma olmadan:
 npx @azadev/commit-gen
-# və ya qlobal quraşdırma ilə:
-commit-gen
 ```
 
 **Yalnız ilk işlətmədə** aşağıdakıları soruşacaq:
@@ -89,7 +99,7 @@ Hamısını yadda saxlayır və növbəti işlətmələrində birbaşa tanıyır
 ## 🔄 İş axını
 
 ```
-git add .  →  commit-gen  →  mesajı seç  →  commit atıldı ✔
+git add .  →  azadev-commit-gen  →  mesajı seç  →  commit atıldı ✔
 ```
 
 Heç bir konfiqurasiya faylına ehtiyyac yoxdur.
@@ -98,19 +108,22 @@ Heç bir konfiqurasiya faylına ehtiyyac yoxdur.
 
 ## ⚙️ Faydalı Komandalar
 
-| Komanda                  | Nə edir                                              |
-| ------------------------ | ---------------------------------------------------- |
-| `commit-gen`             | Normal işlətmə — commit mesajı yarat                 |
-| `commit-gen --config`    | Config faylının yerini və məzmununu göstər           |
-| `commit-gen --reset`     | Hər şeyi sıfırla — dil + API açarı yenidən soruşulur |
-| `commit-gen --reset-key` | Yalnız API açarını sil                               |
+| Komanda                              | Nə edir                                              |
+| ------------------------------------ | ---------------------------------------------------- |
+| `azadev-commit-gen`                  | Normal işlətmə — commit mesajı yarat                 |
+| `azadev-commit-gen --config`         | Config faylının yerini və məzmununu göstər           |
+| `azadev-commit-gen --reset`          | Hər şeyi sıfırla — dil + API açarı yenidən soruşulur |
+| `azadev-commit-gen --reset-key`      | Yalnız API açarını sil                               |
+| `npx @azadev/commit-gen`             | Quraşdırma olmadan birbaşa işlət                     |
+| `npx @azadev/commit-gen --reset`     | Quraşdırma olmadan config sıfırla                    |
+| `npx @azadev/commit-gen --reset-key` | Quraşdırma olmadan API açarını sil                   |
 
 ```bash
 # Config faylın harada olduğunu görmək istəyirsənsə:
-commit-gen --config
+azadev-commit-gen --config
 
 # Çıxış nümunəsi:
-#  📁  commit-gen config
+#  📁  @azadev/commit-gen config
 #
 #  Mövcud konfiqurasiya:
 #  ──────────────────────────────────
@@ -118,13 +131,24 @@ commit-gen --config
 #  commitLang : en
 #  apiKey     : gsk_••••••••••••••••
 #  ──────────────────────────────────
+#
+#  Dili dəyişmək üçün  →  azadev-commit-gen --reset
+#  API açarı sıfırla   →  azadev-commit-gen --reset-key
 ```
 
 ---
 
 ## 🌐 Dili Dəyişmək
 
-### Variant 1 — Konfiqurasiyanı sil və yenidən başlat
+### Variant 1 — `--reset` ilə tam sıfırla
+
+```bash
+azadev-commit-gen --reset
+```
+
+Komanda çalışdıqdan sonra növbəti `azadev-commit-gen` işlətməsində dil sehirbazı yenidən çıxacaq.
+
+### Variant 2 — Config faylını birbaşa düzəlt
 
 **Windows:**
 
@@ -138,11 +162,9 @@ del %USERPROFILE%\.commit-gen\config.json
 rm ~/.commit-gen/config.json
 ```
 
-Sonra `commit-gen` işlət — quraşdırma sehirbazı yenidən çıxacaq.
+Sonra `azadev-commit-gen` işlət — quraşdırma sehirbazı yenidən çıxacaq.
 
----
-
-### Variant 2 — Config faylını birbaşa düzəlt
+### Variant 3 — Config faylını əl ilə redaktə et
 
 `~/.commit-gen/config.json` faylını aç:
 
@@ -177,9 +199,13 @@ Faylı saxla — növbəti işlətmədən etibarən qüvvəyə minir.
 
 ## 🔑 API Açarını Sıfırlamaq
 
-Açarın etibarsız olduğu halda və ya yenisini istifadə etmək istədikdə:
+**Variant 1 — Komanda ilə**
 
-**Variant 1 — commit-gen özü idarə etsin**
+```bash
+azadev-commit-gen --reset-key
+```
+
+**Variant 2 — commit-gen özü idarə etsin**
 
 Açar etibarsız olduqda commit-gen aşkar edib soruşacaq:
 
@@ -189,13 +215,13 @@ Açar etibarsız olduqda commit-gen aşkar edib soruşacaq:
 
 `b` bas → açar silinir → yenisini daxil etmək üçün yenidən işlət.
 
-**Variant 2 — Əl ilə sıfırla**
+**Variant 3 — Əl ilə**
 
 `~/.commit-gen/config.json` faylında `apiKey` dəyərini dəyiş:
 
 ```json
 {
-  "apiKey": "gsk_yeni_acarını_bura_daxil_et",
+  "apiKey": "gsk_yeni_acarini_bura_daxil_et",
   "uiLang": "az",
   "commitLang": "en"
 }
@@ -219,7 +245,10 @@ Açar etibarsız olduqda commit-gen aşkar edib soruşacaq:
 
 ## ❓ Tez-tez Verilən Suallar
 
-**S: Ödənişli Groq hesabı lazımdırmı?**
+**S: `commit-gen` əmri tanınmır, nə etməli?**
+C: Paket `azadev-commit-gen` adı ilə qeydiyyata alınıb. `commit-gen` əvəzinə `azadev-commit-gen` işlət. `npx @azadev/commit-gen` da işləyir.
+
+**S: Ödənişli Groq hesabı lazırdırmı?**
 C: Xeyr. Groq-un pulsuz planı gündəlik commit generasiyası üçün kifayətdir.
 
 **S: Kodum hara göndərilir?**
@@ -232,7 +261,7 @@ C: Əvvəl `git add .` işlət. commit-gen yalnız `git diff --cached` — yəni
 C: Groq konsolunda yeni açar yaratdıqdan sonra 10–15 saniyə gözlə — aktivləşməsi vaxt aparır. Sonra yenidən cəhd et.
 
 **S: Monorepo ilə işləyirmi?**
-C: Bəli. İstənilən alt qovluqdan `commit-gen` işlət — cari işçi qovluğun git kontekstini istifadə edir.
+C: Bəli. İstənilən alt qovluqdan `azadev-commit-gen` işlət — cari işçi qovluğun git kontekstini istifadə edir.
 
 **S: Necə silinir?**
 
@@ -255,7 +284,10 @@ rm -rf ~/.commit-gen   # saxlanmış config və API açarını silir
 
 Bu paket **Azad Mirheydərzadə (azadev)** tərəfindən yazılmışdır. Digər npm paketlərim:
 
+| Paket                                                                            | Açıqlama                                    |
+| -------------------------------------------------------------------------------- | ------------------------------------------- |
 | [`@azadev/react-toastdev`](https://www.npmjs.com/package/@azadev/react-toastdev) | React üçün səsli toast bildiriş kitabxanası |
+| [`@azadev/commit-gen`](https://www.npmjs.com/package/@azadev/commit-gen)         | AI ilə git commit mesajı generatoru         |
 
 ---
 

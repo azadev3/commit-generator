@@ -1,10 +1,10 @@
 {
   "name": "@azadev/commit-gen",
-  "version": "2.1.3",
+  "version": "2.2.0",
   "description": "AI-powered commit message generator created by Azad for developers",
   "main": "./dist/index.js",
   "bin": {
-    "commit-gen": "dist/index.js"
+    "azadev-commit-gen": "dist/index.js"
   },
   "files": [
     "dist",
@@ -19,7 +19,10 @@
     "commit",
     "ai",
     "cli",
-    "developer-tools"
+    "developer-tools",
+    "groq",
+    "llama",
+    "conventional-commits"
   ],
   "author": "azadev",
   "license": "MIT",

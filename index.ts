@@ -26,7 +26,7 @@ interface Config {
 
 const T: Record<Lang, Record<string, string>> = {
   az: {
-    banner: '🤖  commit-gen  —  AI destekli commit asistani',
+    banner: '🤖  @azadev/commit-gen  —  AI destekli commit asistani',
     selectUiLang: 'İnterfeys dilini sec:',
     selectCommitLang: 'Commit mesajlarinin dilini sec:',
     langSaved: '✔  Dil parametrleri saxlanildi.',
@@ -57,7 +57,7 @@ const T: Record<Lang, Record<string, string>> = {
     resetNo: '   Sifirlama ləğv edildi.',
   },
   en: {
-    banner: '🤖  commit-gen  —  AI-powered commit assistant',
+    banner: '🤖  @azadev/commit-gen  —  AI-powered commit assistant',
     selectUiLang: 'Select interface language:',
     selectCommitLang: 'Select commit message language:',
     langSaved: '✔  Language preferences saved.',
@@ -88,7 +88,7 @@ const T: Record<Lang, Record<string, string>> = {
     resetNo: '   Reset cancelled.',
   },
   tr: {
-    banner: '🤖  commit-gen  —  AI destekli commit asistanı',
+    banner: '🤖  @azadev/commit-gen  —  AI destekli commit asistanı',
     selectUiLang: 'Arayüz dilini seç:',
     selectCommitLang: 'Commit mesajı dilini seç:',
     langSaved: '✔  Dil tercihleri kaydedildi.',
@@ -203,7 +203,6 @@ async function validateApiKey(apiKey: string): Promise<boolean> {
     return true;
   } catch (err: any) {
     if (err?.status === 401 || err?.status === 403) return false;
-    // Network or other errors — assume key might be valid, don't reject
     return true;
   }
 }
@@ -254,9 +253,9 @@ Rules:
 async function main() {
   const args = process.argv.slice(2);
 
-  // ── --config : show config file path & contents ────────────────────────────
+  // ── --config ───────────────────────────────────────────────────────────────
   if (args.includes('--config')) {
-    console.log('\n' + chalk.bgBlue.white.bold('  📁  commit-gen config  '));
+    console.log('\n' + chalk.bgBlue.white.bold('  📁  @azadev/commit-gen config  '));
     console.log('\n' + chalk.bold('  Fayl yeri:'));
     console.log(chalk.cyan(`  ${CONFIG_FILE}\n`));
     if (fs.existsSync(CONFIG_FILE)) {
@@ -271,14 +270,14 @@ async function main() {
       );
       console.log(chalk.gray('  ──────────────────────────────────'));
     } else {
-      console.log(chalk.yellow('  ⚠  Config faylı hələ yaradılmayıb. commit-gen işlət.\n'));
+      console.log(chalk.yellow('  ⚠  Config faylı hələ yaradılmayıb. azadev-commit-gen işlət.\n'));
     }
-    console.log(chalk.gray('\n  Dili dəyişmək üçün  →  commit-gen --reset'));
-    console.log(chalk.gray('  API açarı sıfırla   →  commit-gen --reset-key\n'));
+    console.log(chalk.gray('\n  Dili dəyişmək üçün  →  azadev-commit-gen --reset'));
+    console.log(chalk.gray('  API açarı sıfırla   →  azadev-commit-gen --reset-key\n'));
     process.exit(0);
   }
 
-  // ── --reset : wipe entire config (language + key) ──────────────────────────
+  // ── --reset ────────────────────────────────────────────────────────────────
   if (args.includes('--reset')) {
     if (fs.existsSync(CONFIG_FILE)) {
       fs.unlinkSync(CONFIG_FILE);
@@ -291,7 +290,7 @@ async function main() {
     process.exit(0);
   }
 
-  // ── --reset-key : wipe only api key ────────────────────────────────────────
+  // ── --reset-key ────────────────────────────────────────────────────────────
   if (args.includes('--reset-key')) {
     saveConfig({ apiKey: '' });
     console.log(
@@ -301,7 +300,9 @@ async function main() {
   }
 
   // Banner
-  console.log('\n' + chalk.bgBlue.white.bold(`  ${' '.repeat(10)} commit-gen ${' '.repeat(10)}  `));
+  console.log(
+    '\n' + chalk.bgBlue.white.bold(`  ${' '.repeat(6)} @azadev/commit-gen ${' '.repeat(6)}  `),
+  );
   console.log(chalk.blue.dim('  AI-powered commit assistant\n'));
   divider();
 
@@ -340,7 +341,6 @@ async function main() {
       process.exit(1);
     }
 
-    // Validate before saving
     const spinner = ora({ text: chalk.dim('  Validating API key...'), color: 'cyan' }).start();
     const valid = await validateApiKey(apiKey);
     spinner.stop();

@@ -1,6 +1,6 @@
 {
   "name": "@azadev/commit-gen",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "AI-powered commit message generator created by Azad for developers",
   "main": "./dist/index.js",
   "bin": {
